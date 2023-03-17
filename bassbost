@@ -8,20 +8,18 @@ const songArtist = document.getElementById("song-artist");
 const playPauseButton = document.getElementById("playPause-button");
 const loopButton = document.getElementById("loop-button");
 const bassButton = document.getElementById("bass-button");
-const revoEngineText = document.getElementById("revomusic-engine-text")
+
 const colorThief = new ColorThief();
 
-let audioContext;
-let audioContextSrc;
-let bassBooster = null;
+let audioCtx;
+let audioCtxSource;
+let bassFilter = null;
 
 let albumCoverColor;
 
-let togglePage = 1;
-
 let playPauseStatus = false;
 let loopStatus = false;
-let bassBoostStatus = false;
+let bassBoostStatus = true;
 
 let firstLoad = true;
 
@@ -48,15 +46,18 @@ function loadMusic(index) {
 
 window.onload = function () {
 	loadMusic(indexMusic);
-	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-		if (window.navigator.standalone === false) {
-			document.getElementById("music-player").style.display = "none";
-			document.getElementById("web-app-error").style.display = "block";
-		}
-	}
 };
 
 function playPause() {
+	audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+	audioCtxSource = audioCtx.createMediaElementSource(audioPlayer);
+	bassFilter = audioCtx.createBiquadFilter();
+	bassFilter.type = "lowshelf";
+	bassFilter.frequency.value = 150; // ajuster la fréquence en fonction de vos besoins
+	bassFilter.gain.value = 5;
+	audioCtxSource.connect(bassFilter);
+	// connecter le filtre passe-bas à la sortie audio
+	bassFilter.connect(audioCtx.destination);
 	if (playPauseStatus) {
 		audioPlayer.pause();
 		playPauseButton.textContent = "▶️";
@@ -93,41 +94,29 @@ function nextMusic() {
 }
 
 function bassBoostToggle() {
-	if (bassBooster === null) {
-		audioContext = new AudioContext();
-		audioContextSrc = audioContext.createMediaElementSource(audioPlayer);
-		bassBooster = audioContext.createBiquadFilter();
-		bassBooster.type = "lowshelf";
-		bassBooster.frequency.value = 200;
-		bassBooster.gain.value = 0;
-		audioContextSrc.connect(bassBooster);
-		bassBooster.connect(audioContext.destination);
+	if (!audioCtx) {
+	  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 	}
 	if (bassBoostStatus) {
-		bassBooster.gain.value = 0;
-		bassButton.textContent = "🔇";
-		revoEngineText.textContent = "Désactivé • RevoMusic Audio Engine"
-		bassBoostStatus = false;
+	  bassButton.textContent = "🔇";
+	  if (audioCtx.destination == bassFilter.destination) {
+		bassFilter.disconnect(audioCtx.destination);
+	  }
+	  audioCtxSource.disconnect(bassFilter);
+	  audioCtxSource.connect(audioCtx.destination);
 	} else {
-		bassBooster.gain.value = 7;
-		bassButton.textContent = "💥";
-		revoEngineText.textContent = "Activé • RevoMusic Audio Engine"
-		bassBoostStatus = true;
+	  if (audioPlayer.paused) {
+		audioPlayer.play();
+	  }
+	  audioCtxSource.disconnect(audioCtx.destination);
+	  audioCtxSource.connect(bassFilter);
+	  if (audioCtx.destination != bassFilter.destination) {
+		bassFilter.connect(audioCtx.destination);
+	  }
+	  bassButton.textContent = "💥";
 	}
-}
-
-
-function moreButtonToggle() {
-	if (togglePage === 1) {
-		document.getElementById("song-control-container").style.display = "none";
-		document.getElementById("other-control-container").style.display = "flex";
-		togglePage = 2;
-	} else if (togglePage === 2) {
-		document.getElementById("song-control-container").style.display = "flex";
-		document.getElementById("other-control-container").style.display = "none";
-		togglePage = 1;
-	}
-}
+	bassBoostStatus = !bassBoostStatus;
+  }
 
 function displayMusic() {
 	albumCover.src = musicList.albumcoverimg;

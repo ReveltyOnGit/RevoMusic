@@ -28,5 +28,11 @@
         "artist": "Zola",
         "albumcoverimg": "albums/Zola_CARTIER PANTHÈRE.png",
         "audiofile": "musiques/Zola_CARTIER PANTHÈRE.mp3"
+    },
+    {
+        "title": "COEUR DE ICE",
+        "artist": "Zola, Damso",
+        "albumcoverimg": "albums/Zola_COEUR_DE_ICE.png",
+        "audiofile": "musiques/Zola_COEUR_DE_ICE.mp3"
     }
 ]

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Player • RevoMusic</title>
+    <title>RevoMusic</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="apple-touch-icon" href="app-icon.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -16,13 +16,8 @@
 </head>
 
 <body>
-    <div id="web-app-error">
-        <h1 id="web-app-error-title">Veuillez installer la Web-app pour utiliser RevoMusic.</h1>
-        <p id="web-app-error-text"></p>
-        <img id="webapp-guide" src="webapp-guide.png" alt="Guide Webapp">
-    </div>
     <div id="music-player">
-        <h1>RevoMusic <span id="version">v0.2</span></h1>
+        <h1>RevoMusic <span id="version">v0.1</span></h1>
         <audio id="audio-player" src=""></audio>
         <div id="album-cover-container">
             <img id="album-cover" src="/albums/default.png" alt="Image de l'album">
@@ -34,18 +29,13 @@
         <div id="progress-bar-container">
             <input type="range" id="progress-bar" min="0" max="100" step="0.1" value="0">
         </div>
-        <p id="revomusic-engine-text">Désactivé • RevoMusic Audio Engine</p>
+        <p id="revomusic-engine-text">Disabled • RevoMusic Audio Engine</p>
         <div id="song-control-container">
-            <button id="more-button" onclick="moreButtonToggle()">⚙️</button>
+            <button id="bass-button" onclick="bassBoostToggle()">🔇</button>
             <button id="previous-button" onclick="previousMusic()">⏪</button>
             <button id="playPause-button" onclick="playPause()">▶️</button>
             <button id="next-button" onclick="nextMusic()">⏩</button>
             <button id="loop-button" onclick="loopMusic()">⏹️</button>
-        </div>
-        <div id="other-control-container">
-            <button id="more-button" onclick="moreButtonToggle()">◀️</button>
-            <button id="bass-button" onclick="bassBoostToggle()">🔇</button>
-            <button id="reload-button" onclick="location.reload()">🪲</button>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>

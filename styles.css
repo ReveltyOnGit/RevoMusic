@@ -18,7 +18,7 @@ body {
   padding: 20px;
 }
 
-#music-player #version {
+#version {
   font-size: 15px;
   opacity: 0.8;
 }
@@ -28,7 +28,30 @@ body {
   font-family: 'Sora', Arial, sans-serif;
 }
 
-#music-player h1 {
+#web-app-error {
+  display: none;
+  text-align: center;
+}
+
+#web-app-error h1 {
+  margin: 10px 0px 20px 0px;
+}
+#web-app-error p {
+  color: white;
+  font-family: 'Sora', Arial, sans-serif;
+}
+
+
+#web-app-error img {
+  width: 70%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+h1 {
+  color: white;
   margin: 10px 0px 20px 0px;
   font-size: 25px;
   font-family: 'Sora', Arial, sans-serif;
@@ -91,11 +114,22 @@ body {
 }
 
 #music-player #song-control-container {
+  display: flex;
   left: 50%;
   transform: translate(-50%, -50%);
   position: fixed;
   bottom: 0px;
-  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+#music-player #other-control-container {
+  display: none;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  bottom: 0px;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
@@ -110,6 +144,20 @@ body {
   background-color: transparent;
   color: #fff;
   cursor: pointer;
+  -webkit-transition: -webkit-transform 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+
+#other-control-container button {
+  font-size: 2em;
+  margin: 0 10px;
+  padding: 10px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
 }
 
