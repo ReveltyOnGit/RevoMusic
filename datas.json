@@ -1,0 +1,20 @@
+[
+    {
+        "title": "AMBER",
+        "artist": "Zola",
+        "albumcoverimg": "albums/Zola_AMBER.png",
+        "audiofile": "musiques/Zola_AMBER.mp3"
+    },
+    {
+        "title": "Placebo",
+        "artist": "Dinos",
+        "albumcoverimg": "albums/Dinos_Placebo.png",
+        "audiofile": "musiques/Dinos_Placebo.mp3"
+    },
+    {
+        "title": "N. J Respect R",
+        "artist": "Damso",
+        "albumcoverimg": "albums/Damso_N._J_Respect_R.png",
+        "audiofile": "musiques/Damso_N._J_Respect_R.mp3"
+    }
+]

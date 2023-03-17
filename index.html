@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="RevoMusic">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#212121">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+</head>
+<body>
+    <div id="music-player">
+        <audio id="audio-player" src=""></audio>
+        <div id="album-cover-container">
+            <img id="album-cover" src="" alt="Image de l'album">
+        </div>
+        <div id="song-info-container">
+            <p id="song-title">Chargement...</p>
+            <p id="song-artist">Chargement...</p>
+        </div>
+        <div id="progress-bar-container">
+            <input type="range" id="progress-bar" min="0" max="100" step="0.1" value="0">
+        </div>
+        <div id="song-control-container">
+            <button id="previous-button" onclick="previousMusic()">⏪</button>
+            <button id="playPause-button" onclick="playPause()">▶️</button>
+            <button id="next-button" onclick="nextMusic()">⏩</button>
+            <button id="loop-button" onclick="loopMusic()">⏹️</button>
+        </div>
+    </div>
+    <script src="player.js"></script>
+</body>
+</html>
+  
