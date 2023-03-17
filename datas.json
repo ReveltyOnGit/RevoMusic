@@ -16,5 +16,17 @@
         "artist": "Damso",
         "albumcoverimg": "albums/Damso_N._J_Respect_R.png",
         "audiofile": "musiques/Damso_N._J_Respect_R.mp3"
+    },
+    {
+        "title": "TOUTE LA JOURNÉE",
+        "artist": "Zola, Tiakola",
+        "albumcoverimg": "albums/Zola_TOUTE LA JOURNÉE.png",
+        "audiofile": "musiques/Zola_TOUTE LA JOURNÉE.mp3"
+    },
+    {
+        "title": "CARTIER PANTHÈRE",
+        "artist": "Zola",
+        "albumcoverimg": "albums/Zola_CARTIER PANTHÈRE.png",
+        "audiofile": "musiques/Zola_CARTIER PANTHÈRE.mp3"
     }
 ]

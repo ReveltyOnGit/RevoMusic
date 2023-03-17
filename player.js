@@ -7,9 +7,14 @@ const songTitle = document.getElementById("song-title");
 const songArtist = document.getElementById("song-artist");
 const playPauseButton = document.getElementById("playPause-button");
 const loopButton = document.getElementById("loop-button");
+const colorThief = new ColorThief();
+
+let albumCoverColor;
 
 let playPauseStatus = false;
 let loopStatus = false;
+
+let firstLoad = true;
 
 let musicProgress = NaN;
 
@@ -18,10 +23,6 @@ let musicCount = 0;
 let indexMusic = 0;
 
 let musicList = [];
-
-window.onload = function () {
-	loadMusic(indexMusic);
-};
 
 function loadMusic(index) {
 	fetch('datas.json')
@@ -35,6 +36,10 @@ function loadMusic(index) {
 			console.error(error);
 		});
 }
+
+window.onload = function () {
+	loadMusic(indexMusic);
+};
 
 function playPause() {
 	if (playPauseStatus) {
@@ -62,12 +67,28 @@ function nextMusic() {
 		audioPlayer.pause();
 		playPauseButton.textContent = "▶️";
 		loadMusic(indexMusic);
-	} 
+	} else if (indexMusic + 1 === musicCount) {
+		if (loopStatus === false) {
+			if (audioPlayer.ended) {
+				playPauseButton.textContent = "▶️";
+				playPauseStatus = false;
+			}
+		}
+	}
 }
 
 function displayMusic() {
-	audioPlayer.src = musicList.audiofile;
 	albumCover.src = musicList.albumcoverimg;
+	if (albumCover.complete) {
+		albumCoverColor = colorThief.getColor(albumCover);
+		document.body.style.backgroundColor = `rgb(${albumCoverColor.join(",")})`;
+	} else {
+		albumCover.addEventListener('load', function () {
+			albumCoverColor = colorThief.getColor(albumCover);
+			document.body.style.backgroundColor = `rgb(${albumCoverColor.join(",")})`;
+		});
+	}
+	audioPlayer.src = musicList.audiofile;
 	songTitle.textContent = musicList.title;
 	songArtist.textContent = musicList.artist;
 	audioPlayer.title = musicList.title;
@@ -76,6 +97,7 @@ function displayMusic() {
 		playPauseButton.textContent = "⏸️";
 	}
 	musicProgress = NaN;
+	firstLoad = false;
 }
 
 function loopMusic() {
